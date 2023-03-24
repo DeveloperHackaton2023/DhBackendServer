@@ -2,11 +2,9 @@ package space.damirka.DhBackendServer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import space.damirka.DhBackendServer.Dtos.CreateTicketDto;
+import space.damirka.DhBackendServer.Dtos.ListTicketsDto;
 import space.damirka.DhBackendServer.services.TicketService;
 
 import java.util.Objects;
@@ -33,5 +31,20 @@ public class TicketController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("list/")
+    public ResponseEntity<?> listTickets(ListTicketsDto listTicketsDto) {
+        try {
+            return ResponseEntity.ok(ticketService.listTickets(listTicketsDto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // TODO:
+    //  1. Create tickets by user with flat
+    //  2. Get all tickets
+    //  3. 
+    //
 
 }

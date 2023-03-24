@@ -1,5 +1,6 @@
 package space.damirka.DhBackendServer.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,18 +8,22 @@ import java.util.List;
 
 @Entity
 @Data
-public class UserEntity
-{
+public class UserHouseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
-    private String iin;
-    @Column(unique = true)
-    private String telephone;
-    private String fullname;
+
     private String address;
 
+    private String flatNumber;
+
+    private String info;
+
     @OneToMany(fetch = FetchType.LAZY)
-    private List<UserHouseEntity> houses;
+    private List<TicketEntity> tickets;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private UserEntity user;
 }

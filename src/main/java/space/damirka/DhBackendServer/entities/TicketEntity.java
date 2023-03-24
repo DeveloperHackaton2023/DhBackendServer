@@ -15,7 +15,7 @@ public class TicketEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String  Subject;
+    private String Subject;
 
     private String Description;
 

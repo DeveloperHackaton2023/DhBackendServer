@@ -3,6 +3,7 @@ package space.damirka.DhBackendServer.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.damirka.DhBackendServer.Dtos.CreateTicketDto;
+import space.damirka.DhBackendServer.Dtos.ListTicketsDto;
 import space.damirka.DhBackendServer.entities.StatusEntity;
 import space.damirka.DhBackendServer.entities.TicketEntity;
 import space.damirka.DhBackendServer.repositories.StatusRepository;
@@ -10,6 +11,8 @@ import space.damirka.DhBackendServer.repositories.TicketRepository;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TicketService {
@@ -39,5 +42,9 @@ public class TicketService {
         ticket.setStatuses(Collections.singletonList(statusEntity));
 
         ticketRepository.save(ticket);
+    }
+
+    public List<TicketEntity> listTickets(ListTicketsDto listTicketsDto) {
+        return ticketRepository.findAll();
     }
 }

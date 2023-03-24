@@ -1,10 +1,9 @@
 package space.damirka.DhBackendServer.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +15,11 @@ public class OSIEntity
 
     private String title;
 
+    private String info;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<UserHouseEntity> houses;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AdminEntity admin;
 }
