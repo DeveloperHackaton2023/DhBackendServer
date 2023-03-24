@@ -6,14 +6,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Data
-public class OSI
+public class StatusEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    private StatusEnum Title;
 
-    private String title;
+    private Date Created;
 
+    public StatusEntity()
+    {
+        this.Title = StatusEnum.Created;
+    }
 }

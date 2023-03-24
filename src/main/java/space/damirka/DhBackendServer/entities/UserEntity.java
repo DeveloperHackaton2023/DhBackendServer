@@ -1,13 +1,14 @@
 package space.damirka.DhBackendServer.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
-
-import java.util.List;
 
 @Entity
 @Data
-public class Admin
+public class UserEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,6 @@ public class Admin
     private String iin;
     private String telephone;
     private String fullname;
-
-    @OneToMany
-    private List<OSI> Osis;
+    private String address;
 
 }

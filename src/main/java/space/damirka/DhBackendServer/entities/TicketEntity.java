@@ -1,14 +1,15 @@
 package space.damirka.DhBackendServer.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
 
 import java.util.Date;
 import java.util.List;
 
-public class Ticket
+@Entity
+@Data
+public class TicketEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,8 @@ public class Ticket
 
     private Date Created;
 
-    private List<Status> Statuses;
+    @OneToMany
+    private List<StatusEntity> Statuses;
 
     private String AdminResponse;
 
