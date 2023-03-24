@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CreateTicketDto {
     private String subject;
-    private String problem;
+    private String description;
     private String iin;
     private String telephone;
 }

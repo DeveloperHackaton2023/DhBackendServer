@@ -17,7 +17,7 @@ public class TicketEntity
 
     private String  Subject;
 
-    private String Problem;
+    private String Description;
 
     private Date Created;
 
