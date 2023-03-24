@@ -1,4 +1,4 @@
-﻿package space.damirka.DhBackendServer.entities;
+package space.damirka.DhBackendServer.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
