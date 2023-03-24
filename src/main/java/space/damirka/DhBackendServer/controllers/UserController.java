@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("get/info/")
-    public ResponseEntity<?> createUser(@RequestBody UserInfoDto userDto) {
+    public ResponseEntity<?> getUserInfo(@RequestBody UserInfoDto userDto) {
         try {
             return ResponseEntity.ok(userService.getInfo(userDto));
         } catch (Exception e) {
