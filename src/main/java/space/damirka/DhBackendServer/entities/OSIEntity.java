@@ -1,5 +1,6 @@
 package space.damirka.DhBackendServer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,5 +22,6 @@ public class OSIEntity
     private List<UserHouseEntity> houses;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private AdminEntity admin;
 }
