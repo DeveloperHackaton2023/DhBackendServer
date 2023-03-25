@@ -3,8 +3,8 @@ package space.damirka.DhBackendServer.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import space.damirka.DhBackendServer.Dtos.CreateTicketDto;
-import space.damirka.DhBackendServer.Dtos.ListTicketsDto;
+import space.damirka.DhBackendServer.dtos.CreateTicketDto;
+import space.damirka.DhBackendServer.dtos.ListTicketsDto;
 import space.damirka.DhBackendServer.services.TicketService;
 
 import java.util.Objects;

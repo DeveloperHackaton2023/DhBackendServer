@@ -3,8 +3,7 @@ package space.damirka.DhBackendServer.controllers;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import space.damirka.DhBackendServer.Dtos.CreateUserDto;
-import space.damirka.DhBackendServer.Dtos.UserInfoDto;
+import space.damirka.DhBackendServer.dtos.UserInfoDto;
 import space.damirka.DhBackendServer.services.UserService;
 
 @RestController
@@ -27,11 +26,22 @@ public class UserController {
         }
     }
 
-    // TODO:
-    //  1. Create User
-    //      a. if user exist just add new flat
-    //  2. Get all flats
-    //  3.
-    //  4.
+    @GetMapping("get/ticket/{id}")
+    public ResponseEntity<?> getTicket(Long id) {
+        try {
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("add/ticket/")
+    public ResponseEntity<?> addTicket(@RequestBody UserInfoDto userDto) {
+        try {
+            return ResponseEntity.ok(userService.getInfo(userDto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }

@@ -2,11 +2,10 @@ package space.damirka.DhBackendServer.services;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import space.damirka.DhBackendServer.Dtos.CreateHouseDto;
-import space.damirka.DhBackendServer.Dtos.CreateUserDto;
-import space.damirka.DhBackendServer.Dtos.UserInfoDto;
+import space.damirka.DhBackendServer.dtos.CreateHouseDto;
+import space.damirka.DhBackendServer.dtos.CreateUserDto;
+import space.damirka.DhBackendServer.dtos.UserInfoDto;
 import space.damirka.DhBackendServer.entities.AdminEntity;
 import space.damirka.DhBackendServer.entities.OSIEntity;
 import space.damirka.DhBackendServer.entities.UserEntity;
@@ -20,7 +19,6 @@ import java.rmi.NoSuchObjectException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class UserService {

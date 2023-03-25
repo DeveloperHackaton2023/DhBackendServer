@@ -1,4 +1,4 @@
-package space.damirka.DhBackendServer.Dtos;
+package space.damirka.DhBackendServer.dtos;
 
 import lombok.Data;
 
