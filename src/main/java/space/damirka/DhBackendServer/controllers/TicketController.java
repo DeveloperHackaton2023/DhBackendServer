@@ -20,17 +20,17 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("create/")
-    public ResponseEntity<?> createTicket(CreateTicketDto ticketDto) {
-        try {
-            if(Objects.isNull(ticketDto))
-                return ResponseEntity.badRequest().body("Non valid request");
-            ticketService.createTicket(ticketDto);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+//    @PostMapping("create/")
+//    public ResponseEntity<?> createTicket(CreateTicketDto ticketDto) {
+//        try {
+//            if(Objects.isNull(ticketDto))
+//                return ResponseEntity.badRequest().body("Non valid request");
+//            ticketService.createTicket(ticketDto);
+//            return ResponseEntity.ok().build();
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//    }
 
     @GetMapping("list/")
     public ResponseEntity<?> listTickets(ListTicketsDto listTicketsDto) {

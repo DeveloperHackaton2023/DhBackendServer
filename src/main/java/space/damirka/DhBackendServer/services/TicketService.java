@@ -26,22 +26,22 @@ public class TicketService {
         this.statusRepository = statusRepository;
     }
 
-    public void createTicket(CreateTicketDto ticketDto) {
-        TicketEntity ticket = new TicketEntity();
-        ticket.setSubject(ticketDto.getSubject());
-        ticket.setDescription(ticketDto.getDescription());
-
-        Date now = new Date();
-        ticket.setCreated(now);
-
-        StatusEntity statusEntity = new StatusEntity(now);
-
-        statusEntity = statusRepository.save(statusEntity);
-
-        ticket.setStatuses(Collections.singletonList(statusEntity));
-
-        ticketRepository.save(ticket);
-    }
+//    public void createTicket(CreateTicketDto ticketDto) {
+//        TicketEntity ticket = new TicketEntity();
+//        ticket.setSubject(ticketDto.getSubject());
+//        ticket.setDescription(ticketDto.getDescription());
+//
+//        Date now = new Date();
+//        ticket.setCreated(now);
+//
+//        StatusEntity statusEntity = new StatusEntity(now);
+//
+//        statusEntity = statusRepository.save(statusEntity);
+//
+//        ticket.setStatuses(Collections.singletonList(statusEntity));
+//
+//        ticketRepository.save(ticket);
+//    }
 
     public List<TicketEntity> listTickets(ListTicketsDto listTicketsDto) {
         return ticketRepository.findAll();

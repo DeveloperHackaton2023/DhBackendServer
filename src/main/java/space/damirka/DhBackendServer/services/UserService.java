@@ -5,20 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import space.damirka.DhBackendServer.dtos.CreateHouseDto;
 import space.damirka.DhBackendServer.dtos.CreateUserDto;
+import space.damirka.DhBackendServer.dtos.UserAddTicketHouseDto;
 import space.damirka.DhBackendServer.dtos.UserInfoDto;
-import space.damirka.DhBackendServer.entities.AdminEntity;
-import space.damirka.DhBackendServer.entities.OSIEntity;
-import space.damirka.DhBackendServer.entities.UserEntity;
-import space.damirka.DhBackendServer.entities.UserHouseEntity;
-import space.damirka.DhBackendServer.repositories.AdminRepository;
-import space.damirka.DhBackendServer.repositories.HouseRepository;
-import space.damirka.DhBackendServer.repositories.OsiRepository;
-import space.damirka.DhBackendServer.repositories.UserRepository;
+import space.damirka.DhBackendServer.entities.*;
+import space.damirka.DhBackendServer.repositories.*;
 
 import java.rmi.NoSuchObjectException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -28,13 +21,18 @@ public class UserService {
     private final OsiRepository osiRepository;
     private final AdminRepository adminRepository;
 
+    private final StatusRepository statusRepository;
+    private final TicketRepository ticketRepository;
+
     @Autowired
     public UserService(UserRepository userRepository, HouseRepository houseRepository, OsiRepository osiRepository,
-                       AdminRepository adminRepository) {
+                       AdminRepository adminRepository, StatusRepository statusRepository, TicketRepository ticketRepository) {
         this.userRepository = userRepository;
         this.houseRepository = houseRepository;
         this.osiRepository = osiRepository;
         this.adminRepository = adminRepository;
+        this.statusRepository = statusRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     @PostConstruct
@@ -113,5 +111,34 @@ public class UserService {
         if(Objects.isNull(user))
             throw new NoSuchObjectException("Can't find user with your iin");
         return user;
+    }
+
+    private TicketEntity createTicket(UserAddTicketHouseDto houseDto) {
+        TicketEntity ticket = new TicketEntity();
+        ticket.setSubject(houseDto.getSubject());
+        ticket.setDescription(houseDto.getDescription());
+
+        Date now = new Date();
+        ticket.setCreated(now);
+
+        StatusEntity statusEntity = new StatusEntity(now);
+
+        statusEntity = statusRepository.save(statusEntity);
+
+        ticket.setStatuses(Collections.singletonList(statusEntity));
+
+        return ticketRepository.save(ticket);
+    }
+
+    public void addTicket(UserAddTicketHouseDto houseDto) {
+        UserEntity user = userRepository.findOneByIinAndTelephone(houseDto.getIin(), houseDto.getTelephone());
+        user.getHouses().forEach(house -> {
+            if(Objects.equals(house.getId(), houseDto.getHouseId())) {
+
+                house.getTickets().add(createTicket(houseDto));
+
+                houseRepository.save(house);
+            }
+        });
     }
 }
