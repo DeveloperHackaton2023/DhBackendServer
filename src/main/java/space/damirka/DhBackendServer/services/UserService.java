@@ -3,10 +3,7 @@ package space.damirka.DhBackendServer.services;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import space.damirka.DhBackendServer.dtos.CreateHouseDto;
-import space.damirka.DhBackendServer.dtos.CreateUserDto;
-import space.damirka.DhBackendServer.dtos.UserAddTicketHouseDto;
-import space.damirka.DhBackendServer.dtos.UserInfoDto;
+import space.damirka.DhBackendServer.dtos.*;
 import space.damirka.DhBackendServer.entities.*;
 import space.damirka.DhBackendServer.repositories.*;
 
@@ -140,5 +137,28 @@ public class UserService {
                 houseRepository.save(house);
             }
         });
+    }
+
+    public RespondUserInfoDto getUserByIin(String iin) throws NoSuchObjectException {
+        UserEntity user = userRepository.findOneByIin(iin);
+
+        if(Objects.nonNull(user)) {
+            RespondUserInfoDto respond = new RespondUserInfoDto();
+            respond.setId(user.getId());
+            respond.setIin(iin);
+            respond.setFullname(user.getFullname());
+            respond.setTelephone(user.getTelephone());
+            return respond;
+        }
+        throw new NoSuchObjectException("Can't find user with your iin");
+    }
+
+    public List<UserHouseEntity> getHousesOfUser(String iin) throws NoSuchObjectException {
+        UserEntity user = userRepository.findOneByIin(iin);
+
+        if(Objects.nonNull(user)) {
+            return houseRepository.findAllByUser(user);
+        }
+        throw new NoSuchObjectException("Can't find user with your iin");
     }
 }

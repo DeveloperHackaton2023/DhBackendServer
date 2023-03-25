@@ -1,6 +1,7 @@
 package space.damirka.DhBackendServer.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,5 +26,6 @@ public class UserHouseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
+    @JsonIgnore
     private UserEntity user;
 }
