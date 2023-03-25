@@ -18,16 +18,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("create/")
-    public ResponseEntity<?> createUser(@RequestBody CreateUserDto userDto) {
-        try {
-            userService.createUser(userDto);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
     @PostMapping("get/info/")
     public ResponseEntity<?> getUserInfo(@RequestBody UserInfoDto userDto) {
         try {

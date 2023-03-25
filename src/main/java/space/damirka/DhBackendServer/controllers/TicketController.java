@@ -41,10 +41,4 @@ public class TicketController {
         }
     }
 
-    // TODO:
-    //  1. Create tickets by user with flat
-    //  2. Get all tickets
-    //  3. 
-    //
-
 }
