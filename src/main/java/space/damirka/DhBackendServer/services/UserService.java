@@ -61,7 +61,7 @@ public class UserService {
     public void createUser(CreateUserDto userDto) throws NoSuchObjectException {
         // check if user exists
 
-        UserEntity user = userRepository.findOneByIin(userDto.getIin());
+        UserEntity user = userRepository.findOneByIinAndTelephone(userDto.getIin(), userDto.getTelephone());
 
         OSIEntity osi = osiRepository.findById(userDto.getOsiId()).orElse(null);
 
@@ -109,7 +109,7 @@ public class UserService {
 
     public UserEntity getInfo(UserInfoDto userDto) throws NoSuchObjectException {
 
-        UserEntity user = userRepository.findOneByIin(userDto.getIin());
+        UserEntity user = userRepository.findOneByIinAndTelephone(userDto.getIin(), userDto.getTelephone());
         if(Objects.isNull(user))
             throw new NoSuchObjectException("Can't find user with your iin");
         return user;

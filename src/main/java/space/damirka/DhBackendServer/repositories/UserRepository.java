@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findOneByIin(String iin);
+    UserEntity findOneByIinAndTelephone(String iin, String telephone);
 }
