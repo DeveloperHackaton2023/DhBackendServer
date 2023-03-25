@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/auth/users/")
 public class UsersController {
 
     private final AuthUsersService authUsersService;
@@ -22,14 +22,14 @@ public class UsersController {
     }
 
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-    @GetMapping("")
-    public List<Users> GetUsers() {
+    @GetMapping("get/all/")
+    public List<Users> getUsers() {
         return authUsersService.GetAllUsers();
     }
 
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-    @PostMapping("")
-    public Users GetUsers(@RequestBody UsersRequest user) {
+    @PostMapping("get/")
+    public Users getUsers(@RequestBody UsersRequest user) {
         return authUsersService.AddUser(user);
     }
 

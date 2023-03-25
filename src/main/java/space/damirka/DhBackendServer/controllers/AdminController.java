@@ -2,6 +2,7 @@ package space.damirka.DhBackendServer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @PostMapping("create/user/")
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto userDto) {
         try {

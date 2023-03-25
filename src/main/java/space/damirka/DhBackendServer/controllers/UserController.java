@@ -1,5 +1,6 @@
 package space.damirka.DhBackendServer.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
+//    @PreAuthorize(value = "hasRole('ROLE_USER')")
     @PostMapping("get/info/")
     public ResponseEntity<?> getUserInfo(@RequestBody UserInfoDto userDto) {
         try {
