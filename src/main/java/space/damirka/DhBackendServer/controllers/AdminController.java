@@ -57,7 +57,7 @@ public class AdminController {
 
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @PostMapping("edit/ticket/")
-    public ResponseEntity<?> editTicket(Principal principal, EditTicketDto editTicketDto) {
+    public ResponseEntity<?> editTicket(Principal principal, @RequestBody EditTicketDto editTicketDto) {
         try {
             if(principal instanceof UsernamePasswordAuthenticationToken) {
 

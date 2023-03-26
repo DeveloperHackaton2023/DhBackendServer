@@ -21,7 +21,7 @@ public class TicketEntity
 
     private Date Created;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     List<StatusEntity> statuses;
 
     private String AdminResponse;
