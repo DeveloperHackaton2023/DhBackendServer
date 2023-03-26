@@ -22,7 +22,7 @@ public class TicketEntity
     private Date Created;
 
     @OneToMany
-    private List<StatusEntity> Statuses;
+    List<StatusEntity> statuses;
 
     private String AdminResponse;
 

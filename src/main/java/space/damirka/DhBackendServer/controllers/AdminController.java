@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import space.damirka.DhBackendServer.dtos.CreateUserDto;
+import space.damirka.DhBackendServer.dtos.EditTicketDto;
 import space.damirka.DhBackendServer.models.auth.UserSecurity;
 import space.damirka.DhBackendServer.models.auth.Users;
 import space.damirka.DhBackendServer.services.AdminService;
@@ -47,6 +48,23 @@ public class AdminController {
             if(principal instanceof UsernamePasswordAuthenticationToken) {
                 String iin = principal.getName();
                 return ResponseEntity.ok(adminService.getOsi(iin));
+            }
+            return ResponseEntity.badRequest().body("You are not authorized");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+    @PostMapping("edit/ticket/")
+    public ResponseEntity<?> editTicket(Principal principal, EditTicketDto editTicketDto) {
+        try {
+            if(principal instanceof UsernamePasswordAuthenticationToken) {
+
+                if(adminService.editTicket(editTicketDto))
+                    return ResponseEntity.ok().build();
+
+                return ResponseEntity.badRequest().body("Cant update");
             }
             return ResponseEntity.badRequest().body("You are not authorized");
         } catch (Exception e) {
